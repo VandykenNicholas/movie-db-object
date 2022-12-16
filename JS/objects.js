@@ -1,12 +1,9 @@
-function Movie(id, title, genre, rating){
+function Movie(id, title, genre, rating, index){
 		this.id = id
-		// this.poster = poster
 		this.title = title
 		this.genre = genre
-		// this.plot = plot
 		this.rating = rating
-		// this.iRating = irating
-	
+		this.index = index;
 	
 		this.delete = function () {
 			fetch(`https://puffy-thoracic-peanut.glitch.me/movies/`+this.id, {
@@ -15,6 +12,7 @@ function Movie(id, title, genre, rating){
 				.then(() => getMovies());
 			
 		}
+		
 		this.add = function(){
 			
 			let raw =
@@ -24,7 +22,6 @@ function Movie(id, title, genre, rating){
 					genre: this.genre,
 				}
 			;
-			
 			
 		let requestOptions = {
 			method: 'POST',
