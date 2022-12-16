@@ -10,12 +10,22 @@
 
 </head>
 <body>
+<label for="title">Title</label>
+<input type="text" id="title">
+<label for="genre">genre</label>
+<input type="text" id="genre">
+<label for="rating">rating</label>
+<input type="text" id="rating">
+<button id="addServer">ADD</button>
+
+
 </body>
 <script>
 	let movieContainer =[];
 
 	//// movie catcher
-
+function getMovies(){
+	movieContainer = [];
 	fetch(`https://puffy-thoracic-peanut.glitch.me/movies`)
 		.then((response) => response.json())
 		.then((data)=> {
@@ -25,8 +35,20 @@
 			})
 
 		})
-		.then(()=> console.log(movieContainer, movieContainer[0].thisId()));
+		.then(()=> console.log(movieContainer))
+}
 
+////// listeners
+
+	$('#addServer').click(function(){
+		let title = $("#title").val()
+		let rating = $("#rating").val()
+		let genre = $('#genre').val()
+		let movie = new Movie(1, title, rating, genre);
+		movie.add();
+	})
+
+getMovies();
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
