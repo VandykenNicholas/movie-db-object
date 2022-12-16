@@ -15,17 +15,17 @@ function getMovies(){
 						<div class="card" style="width: 18rem;">
 							  <img src="" class="card-img-top" alt="...">
 							  <div class="card-body">
-							    <h5 class="card-title">${m.title}</h5>
-							    <p class="card-text">Plot</p>
+							    <h5 class="card-title title">${m.title}</h5>
+							    <p class="card-text plot">Plot</p>
 							  </div>
 							  <ul class="list-group list-group-flush">
-							    <li class="list-group-item">${m.genre}</li>
-							    <li class="list-group-item">${m.rating}</li>
+							    <li class="list-group-item genre">${m.genre}</li>
+							    <li class="list-group-item rating">${m.rating}</li>
 							    <li class="list-group-item">A third item</li>
 							  </ul>
 							  <div class="card-body">
-							    <button class="btn btn-primary delete" type="button" id="${index}">Delete</button>
-							    <a href="#" class="card-link">Another link</a>
+							    <button class="btn btn-danger delete" type="button" id="${index}">Delete</button>
+							    <button class="btn btn-primary edit" type="button" id="">Edit</button>
                               </div>
 						</div>
 					</div>`)
@@ -45,6 +45,9 @@ $('#addServer').click(function(){
 	let genre = $('#genre').val()
 	let movie = new Movie("N/A", title, rating, genre, "n/a");
 	movie.add();
+	$("#title").val('')
+	$("#rating").val('')
+	$('#genre').val('')
 })
 
 ////////
@@ -53,9 +56,28 @@ function updateEvents(){
 	
 	$('.delete').click(function(){
 		selectedIndex = parseInt($(this).attr("id"));
-		
-		
 		movieContainer[selectedIndex].delete();
+	})
+	
+	$('.edit').click(function(){
+		let tempObj = movieContainer[$(this).prev().attr("id")];
+		let parent = $(this).parent().parent().parent();
+		let title = parent.find(".title");
+		let genre = parent.find(".genre");
+		let rating = parent.find(".rating");
+		let oldTitle = title.text();
+		let oldGenre = genre.text();
+		let oldRating = rating.text();
+		console.log(oldTitle, oldGenre, oldRating);
+		rating.empty();
+		rating.append(`<input class="list-group-item input-sm" type="text">`)
+		title.empty()
+		title.append(`<input class="list-group-item input-sm" type="text">`)
+		genre.empty()
+		genre.append(`<input class="list-group-item input-sm" type="text">`)
+		genre.children().val(`${oldGenre}`);
+		title.children().val(`${oldTitle}`);
+		rating.children().val(`${oldRating}`);
 	})
 }
 
