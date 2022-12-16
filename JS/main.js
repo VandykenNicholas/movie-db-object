@@ -43,7 +43,7 @@ $('#addServer').click(function(){
 	let title = $("#title").val()
 	let rating = $("#rating").val()
 	let genre = $('#genre').val()
-	let movie = new Movie("N/A", title, rating, genre);
+	let movie = new Movie("N/A", title, rating, genre, "n/a");
 	movie.add();
 })
 
