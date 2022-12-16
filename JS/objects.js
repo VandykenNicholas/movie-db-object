@@ -37,9 +37,27 @@ function Movie(id, title, genre, rating, index){
 			
 		}
 		this.edit = function(){
-		
+			let raw =
+				{
+					title: this.title,
+					genre: this.genre,
+					rating: this.rating,
+				}
+			;
+			
+			let requestOptions = {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(raw),
+			};
+			
+			fetch("https://puffy-thoracic-peanut.glitch.me/movies/"+this.id, requestOptions)
+				.then(()=> console.log("Edited movie: "+this.title))
+				.then(()=> getMovies());
+			
 		}
-		
 		
 		this.thisId = function(){
 			return this.id;
